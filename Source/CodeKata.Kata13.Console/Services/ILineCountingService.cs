@@ -6,5 +6,6 @@ namespace CodeKata.Kata13.Console.Services
 {
     public interface ILineCountingService
     {
+        bool IsValidLine(string line);
     }
 }

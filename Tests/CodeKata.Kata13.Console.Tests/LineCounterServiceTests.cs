@@ -1,3 +1,4 @@
+using CodeKata.Kata13.Console.Services;
 using System;
 using Xunit;
 
@@ -5,10 +6,23 @@ namespace CodeKata.Kata13.Console.Tests
 {
     public class LineCounterServiceTests
     {
-        [Fact]
-        public void Test1()
+        private ILineCountingService _sut;
+        public LineCounterServiceTests()
         {
+            _sut = new LineCountingService(); 
+        }
 
+        [Fact]
+        public void IsValidLine_Should_ReturnFalse_WhenLineIsEmptyString()
+        {
+            //Arrange
+            string line = string.Empty;
+
+            //Act
+            var result = _sut.IsValidLine(line);
+
+            //Assert
+            Assert.False(result);
         }
     }
 }
