@@ -26,7 +26,11 @@ namespace CodeKata.Kata13.Console.Services
             if (!inputString.Contains(startingCharacters) || !inputString.Contains(endingCharacters))
                 return inputString;
 
-            return string.Empty;
+            int start = inputString.LastIndexOf(startingCharacters);
+            int end = inputString.IndexOf(endingCharacters, start);
+            string result = inputString.Remove(start, end +endingCharacters.Length - start);
+
+            return result;
         }
 
     }

@@ -38,19 +38,21 @@ namespace CodeKata.Kata13.Console.Tests
             Assert.False(result);
         }
 
-        [Fact]
-        public void RemoveCharactersBetween_Should_ReturnInputString_WhenStartingOrEndingCharactersIsNotFound()
+        [Theory]
+        [InlineData("a;ldkjf/*a;lsdjf;asldfj", "a;ldkjf/*a;lsdjf;asldfj")]
+        [InlineData("a;ldkjfa;ls*/djf;asldfj", "a;ldkjfa;ls*/djf;asldfj")]
+        [InlineData("asdfj/*;lsdjf;*/lsdkf", "asdfjlsdkf")]
+        public void RemoveCharactersBetween_Should_ReturnInputString_WhenStartingOrEndingCharactersIsNotFound(string inputString, string outputString)
         {
             //Arrange
             string startingCharacters = "/*";
             string endingCharacters = "*/";
-            string inputString = "a;lsdjfa;lskdf;alskdjf";
 
             //Act
             var result = _sut.RemoveCharactersBetween(inputString, startingCharacters, endingCharacters);
 
             //Assert
-            Assert.Equal(inputString, result);
+            Assert.Equal(outputString, result);
         }
     }
 }
