@@ -39,9 +39,7 @@ namespace CodeKata.Kata13.Console.Tests
         }
 
         [Theory]
-        [InlineData("a;ldkjf/*a;lsdjf;asldfj", "a;ldkjf/*a;lsdjf;asldfj")]
-        [InlineData("a;ldkjfa;ls*/djf;asldfj", "a;ldkjfa;ls*/djf;asldfj")]
-        [InlineData("asdfj/*;lsdjf;*/lsdkf", "asdfjlsdkf")]
+        [MemberData(nameof(GetTestData))]
         public void RemoveCharactersBetween_Should_ReturnInputString_WhenStartingOrEndingCharactersIsNotFound(string inputString, string outputString)
         {
             //Arrange
@@ -53,6 +51,16 @@ namespace CodeKata.Kata13.Console.Tests
 
             //Assert
             Assert.Equal(outputString, result);
+        }
+
+        public static TheoryData<string, string> GetTestData()
+        {
+            return new TheoryData<string, string>
+            {
+                { "a;ldkjf/*a;lsdjf;asldfj", "a;ldkjf/*a;lsdjf;asldfj" },
+                { "a;ldkjfa;ls*/djf;asldfj", "a;ldkjfa;ls*/djf;asldfj" },
+                 { "asdfj/*;lsdjf;*/lsdkf", "asdfjlsdkf" }
+            };
         }
     }
 }
