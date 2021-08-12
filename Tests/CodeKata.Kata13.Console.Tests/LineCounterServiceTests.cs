@@ -39,7 +39,7 @@ namespace CodeKata.Kata13.Console.Tests
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData))]
+        [MemberData(nameof(GetTestDataForRemoveCharactersFunction))]
         public void RemoveCharactersBetween_Should_ReturnInputString_WhenStartingOrEndingCharactersIsNotFound(string inputString, string outputString)
         {
             //Arrange
@@ -53,13 +53,47 @@ namespace CodeKata.Kata13.Console.Tests
             Assert.Equal(outputString, result);
         }
 
-        public static TheoryData<string, string> GetTestData()
+        [Theory]
+        [MemberData(nameof(GetTestDataForCountNumberOfLinesFunction))]
+        public void CountNumberOfLines_Should_ReturnTheRightNumberOfLines(string inputString, int expectedNumberOfLines)
+        {
+            //Act
+            var result = _sut.GetNumberOfLines(inputString);
+
+            //Assert
+            Assert.Equal(expectedNumberOfLines, result);
+        }
+
+        public static TheoryData<string, string> GetTestDataForRemoveCharactersFunction()
         {
             return new TheoryData<string, string>
             {
                 { "a;ldkjf/*a;lsdjf;asldfj", "a;ldkjf/*a;lsdjf;asldfj" },
                 { "a;ldkjfa;ls*/djf;asldfj", "a;ldkjfa;ls*/djf;asldfj" },
                  { "asdfj/*;lsdjf;*/lsdkf", "asdfjlsdkf" }
+            };
+        }
+
+        public static TheoryData<string, int> GetTestDataForCountNumberOfLinesFunction()
+        {
+            return new TheoryData<string, int>
+            {
+                //{ "a;ldkjf/n//ldfj/na;slfja/*a;slfj*/a;slkdjf/n;asdlfj;", 3 },
+                //{ "a;ldkjf/n//ldfj/na;slfja/*a;slfj*/a;slkdjf/n;asdlfj;/n}/n}/n/n", 5 },
+                {
+                    @"/*****
+                        * This is a test program with 5 lines of code
+                        *  \/* no nesting allowed!
+                        //*****//***/// Slightly pathological comment ending...
+                        
+                        public class Hello {
+                            public static final void main(String [] args) { // gotta love Java
+                                // Say hello
+                                System./*wait*/out./*for*/println/*it*/(""Hello/*"");
+                            }
+                            
+                        }", 5
+                }
             };
         }
     }

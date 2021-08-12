@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CodeKata.Kata13.Console.Services
@@ -9,6 +10,26 @@ namespace CodeKata.Kata13.Console.Services
         //Delete all text between opening and closing /* */
         //Split incoming string by newline character
         //Count number of lines
+
+        public int GetNumberOfLines(string inputString)
+        {
+
+            inputString = RemoveCharactersBetween(inputString, "/*", "*/");
+
+            var inputStringArray = inputString.Split("\n").ToList();
+            var numberOfLines = 0;
+
+            inputStringArray.ForEach(line =>
+            {
+                line = line.Trim();
+                line = line.Replace("\r", "");
+
+                if (IsValidLine(line))
+                    numberOfLines++;
+            });
+
+            return numberOfLines;
+        }
 
         public bool IsValidLine(string line)
         {
@@ -26,11 +47,19 @@ namespace CodeKata.Kata13.Console.Services
             if (!inputString.Contains(startingCharacters) || !inputString.Contains(endingCharacters))
                 return inputString;
 
-            int start = inputString.LastIndexOf(startingCharacters);
+            int start = inputString.IndexOf(startingCharacters);
             int end = inputString.IndexOf(endingCharacters, start);
-            string result = inputString.Remove(start, end +endingCharacters.Length - start);
 
-            return result;
+            if (end < 0)
+            {
+                inputString = inputString.Remove(start, startingCharacters.Length);
+                return RemoveCharactersBetween(inputString, startingCharacters, endingCharacters);
+            }
+
+
+            inputString = inputString.Remove(start, end + endingCharacters.Length - start);
+            return RemoveCharactersBetween(inputString, startingCharacters, endingCharacters);
+
         }
 
     }

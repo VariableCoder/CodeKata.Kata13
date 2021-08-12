@@ -8,5 +8,6 @@ namespace CodeKata.Kata13.Console.Services
     {
         bool IsValidLine(string line);
         string RemoveCharactersBetween(string inputString, string startingCharacters, string endingCharacters);
+        int GetNumberOfLines(string inputString);
     }
 }
