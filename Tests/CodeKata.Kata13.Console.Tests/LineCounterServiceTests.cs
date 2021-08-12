@@ -78,8 +78,8 @@ namespace CodeKata.Kata13.Console.Tests
         {
             return new TheoryData<string, int>
             {
-                //{ "a;ldkjf/n//ldfj/na;slfja/*a;slfj*/a;slkdjf/n;asdlfj;", 3 },
-                //{ "a;ldkjf/n//ldfj/na;slfja/*a;slfj*/a;slkdjf/n;asdlfj;/n}/n}/n/n", 5 },
+                { "a;ldkjf\n//ldfj\na;slfja/*a;slfj*/a;slkdjf\n;asdlfj;", 3 },
+                { "a;ldkjf\n//ldfj\na;slfja/*a;slfj*/a;slkdjf\n;asdlfj;\n}\n}\n\n", 5 },
                 {
                     @"/*****
                         * This is a test program with 5 lines of code
