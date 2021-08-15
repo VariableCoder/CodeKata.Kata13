@@ -14,6 +14,8 @@ namespace CodeKata.Kata13.Console.Services
             _lineCoutingService = lineCountingService;
         }
 
+        public int GetNumberOfTestScenarios() => _inputStringArray.Length;
+
         public int RunTestScenario(int testScenario)
         {
             return _lineCoutingService.GetNumberOfLines(_inputStringArray[testScenario]);

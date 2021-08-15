@@ -6,8 +6,8 @@ namespace CodeKata.Kata13.Console.Tests
 {
     public class TestRunnerServiceTests
     {
-        private ITestRunnerService _sut;
-        private Mock<ILineCountingService> _lineCountingServiceMock;
+        private readonly ITestRunnerService _sut;
+        private readonly Mock<ILineCountingService> _lineCountingServiceMock;
         public TestRunnerServiceTests()
         {
             _lineCountingServiceMock = new Mock<ILineCountingService>();
