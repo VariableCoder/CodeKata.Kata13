@@ -29,19 +29,9 @@ namespace CodeKata.Kata13.Console
 
             ITestRunnerService testService = provider.GetRequiredService<ITestRunnerService>();
 
-            System.Console.WriteLine("Please enter a number corresponding to the desired test scenario to run.");
-            System.Console.Write($"The number entered should vary between 1 and {testService.GetNumberOfTestScenarios()}: ");
+            var inputTestScenario = testService.GetUsersInputTestScenario();
 
-            var testScenarioString = System.Console.ReadLine();
-            int testScenario = default;
-
-            while (!int.TryParse(testScenarioString, out testScenario) || testScenario < 1 || testScenario > 3)
-            {
-                System.Console.WriteLine("Please enter a valid integer between 1 and 3");
-                testScenarioString = System.Console.ReadLine();
-            }
-
-            var numberOfLines = testService.RunTestScenario(testScenario);
+            var numberOfLines = testService.RunTestScenario(inputTestScenario);
 
             System.Console.WriteLine($"Number of lines : {numberOfLines}");
         }

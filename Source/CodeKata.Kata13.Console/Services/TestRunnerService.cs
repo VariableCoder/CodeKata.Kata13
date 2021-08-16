@@ -14,11 +14,27 @@ namespace CodeKata.Kata13.Console.Services
             _lineCoutingService = lineCountingService;
         }
 
-        public int GetNumberOfTestScenarios() => _inputStringArray.Length;
+        public int GetUsersInputTestScenario()
+        {
+
+            System.Console.WriteLine("Please enter a number corresponding to the desired test scenario to run.");
+            System.Console.Write($"The number entered should vary between 1 and {_inputStringArray.Length}: ");
+
+            var testScenarioString = System.Console.ReadLine();
+            int testScenario;
+
+            while (!int.TryParse(testScenarioString, out testScenario) || testScenario < 1 || testScenario > 3)
+            {
+                System.Console.WriteLine("Please enter a valid integer between 1 and 3");
+                testScenarioString = System.Console.ReadLine();
+            }
+
+            return testScenario;
+        }
 
         public int RunTestScenario(int testScenario)
         {
-            return _lineCoutingService.GetNumberOfLines(_inputStringArray[testScenario]);
+            return _lineCoutingService.GetNumberOfLines(_inputStringArray[testScenario - 1]);
         }
     }
 }
